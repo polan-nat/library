@@ -1,0 +1,112 @@
+openapi: 3.0.0
+info:
+  title: Documentação da API da Biblioteca
+  description: Documentação da API RESTful para um sistema de gerenciamento de biblioteca.
+  version: 1.0.0
+servers:
+  - url: http://example.com/api/v1
+paths:
+  /register:
+    post:
+      summary: Registrar um novo usuário.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: Usuário registrado com sucesso.
+          content:
+            application/json:
+              example:
+                message: Usuário registrado com sucesso.
+                user:
+                  id: 1
+                  name: John Doe
+                  email: john@example.com
+                  created_at: '2024-05-29T12:00:00Z'
+                  updated_at: '2024-05-29T12:00:00Z'
+  /login:
+    post:
+      summary: Autenticar um usuário.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login bem-sucedido. Retorna o token de acesso.
+          content:
+            application/json:
+              example:
+                token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+  /books:
+    get:
+      summary: Listar todos os livros.
+      responses:
+        '200':
+          description: Lista de livros recuperada com sucesso.
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: "Livro 1"
+                  year: 2022
+                  author_id: 1
+                - id: 2
+                  title: "Livro 2"
+                  year: 2020
+                  author_id: 2
+  /authors:
+    get:
+      summary: Listar todos os autores.
+      responses:
+        '200':
+          description: Lista de autores recuperada com sucesso.
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "Autor 1"
+                  date_of_birth: "1980-01-01"
+                - id: 2
+                  name: "Autor 2"
+                  date_of_birth: "1975-05-15"
+  /me:
+    get:
+      summary: Obter informações do usuário autenticado.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Retorna as informações do usuário autenticado.
+          content:
+            application/json:
+              example:
+                id: 1
+                name: John Doe
+                email: john@example.com
+                created_at: '2024-05-29T12:00:00Z'
+                updated_at: '2024-05-29T12:00:00Z'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
