@@ -6,11 +6,11 @@ Esta é uma API RESTful para um sistema de gerenciamento de biblioteca, desenvol
 
 1. Clone o repositório para sua máquina local:
 
-git clone https://github.com/seu-usuario/biblioteca-api.git
+git clone https://github.com/polan-nat/library.git
 
 2. Navegue até o diretório do projeto:
 
-cd biblioteca-api
+cd library
 
 3. Instale as dependências do projeto usando o Composer:
 
